@@ -8,7 +8,8 @@ import java.util.List;
 public class Associado {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ASSOCIADO")
+    @SequenceGenerator(name = "SEQ_ASSOCIADO", sequenceName = "id_seq_associado", allocationSize = 1)
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)

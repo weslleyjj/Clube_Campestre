@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class Banco {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_BANCO")
+    @SequenceGenerator(name = "SEQ_BANCO", sequenceName = "id_seq_banco", allocationSize = 1)
     private Long id;
 
     @OneToOne(mappedBy = "banco", cascade = CascadeType.ALL, targetEntity = Associado.class)

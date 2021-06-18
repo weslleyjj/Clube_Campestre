@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class Contato {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CONTATO")
+    @SequenceGenerator(name = "SEQ_CONTATO", sequenceName = "id_seq_contato", allocationSize = 1)
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
