@@ -1,2 +1,15 @@
-package com.weslleyjj.clubecrud.controller;public class CrudRestController {
+package com.weslleyjj.clubecrud.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/")
+public class CrudRestController {
+
+    @RequestMapping("/home")
+    public String visualizar(){
+        return "home";
+    }
+
 }
