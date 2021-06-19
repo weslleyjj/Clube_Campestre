@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AssociadoService {
@@ -25,4 +26,12 @@ public class AssociadoService {
         associadoRepository.save(associado);
     }
 
+    public Associado findById(Long id){
+        Optional<Associado> a = associadoRepository.findById(id);
+        return a.orElse(null);
+    }
+
+    public void remover(Long id){
+        associadoRepository.deleteById(id);
+    }
 }
