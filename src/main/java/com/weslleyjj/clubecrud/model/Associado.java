@@ -48,11 +48,11 @@ public class Associado {
         this.banco = banco;
     }
 
-    public List<Contato> getContato() {
+    public List<Contato> getContatos() {
         return contatos;
     }
 
-    public void setContato(List<Contato> contato) {
+    public void setContatos(List<Contato> contato) {
         this.contatos = contato;
     }
 

@@ -2,11 +2,12 @@ package com.weslleyjj.clubecrud.controller;
 
 import com.weslleyjj.clubecrud.model.Associado;
 import com.weslleyjj.clubecrud.service.AssociadoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -21,8 +22,9 @@ public class CrudController {
     @RequestMapping("/home")
     public ModelAndView visualizar(){
         ModelAndView modelAndView = new ModelAndView("home");
-
-        modelAndView.addObject("associadosList", associadoService.findAllAssociados());
+        List<Associado> associadoList = associadoService.findAllAssociados();
+        modelAndView.addObject("associadosList", associadoList);
+        modelAndView.addObject("totalRegistros", associadoList.size());
         modelAndView.addObject("newAssociado", new Associado());
 
         return modelAndView;

@@ -2,38 +2,271 @@
 <html xmlns:th="http://www.thymeleaf.org"
       lang="pt-br">
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <meta charset="UTF-8">
     <title>Clube Logique Campos & Lazer</title>
+
+    <style>
+        .user-row {
+            margin-bottom: 14px;
+        }
+
+        .user-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .dropdown-user {
+            margin: 13px 0;
+            padding: 5px;
+            height: 100%;
+        }
+
+        .dropdown-user:hover {
+            cursor: pointer;
+        }
+
+        .table-user-information > tbody > tr {
+            border-top: 1px solid rgb(221, 221, 221);
+        }
+
+        .table-user-information > tbody > tr:first-child {
+            border-top: 0;
+        }
+
+
+        .table-user-information > tbody > tr > td {
+            border-top: 0;
+        }
+    </style>
+
 </head>
 <body>
-
-
-<!--    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="cadastraButton">-->
-<!--        Cadastrar Associado-->
-<!--    </button>-->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastraModal">
-        Cadastrar Associado
-    </button>
-    <div>
-        <div th:each="associado : ${associadosList}" >
-            <p th:text="${associado.nome}" ></p>
+<div class="top-head left">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <h1>Logique´s Clube</h1>
+                <small>Clube campestre esporte e lazer</small>
+            </div>
         </div>
     </div>
+</div>
+<br><br>
+<div class="container">
+    <div class="well col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastraModal">Cadastrar Associado</button>
+    </div>
+</div>
 
-    <!--<div th:insert="~{fragments/cadastroFragment :: cadastraAssociado}"></div>-->
-    <div th:insert="~{fragments/cadastroFragment :: cadastraAssociado}"></div>
+<div class="container">
+    <div class="well col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+        <div th:each="associado : ${associadosList}">
+            <div class="row user-row">
+                <div class="col-xs-3 col-sm-2 col-md-1 col-lg-1">
+                    <img class="img-circle"
+                         src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=50"
+                         alt="User Pic">
+                </div>
+                <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
+                    <strong th:text="${associado.nome}"></strong><br>
+                    <span class="text-muted" th:text="'CPF:' + ${associado.cpf}"></span>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 dropdown-user" data-for=".cyruxx">
+                    <i class="glyphicon glyphicon-chevron-down text-muted"></i>
+                </div>
+            </div>
+            <div class="row user-infos cyruxx">
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Informações cadastrais</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
+                                    <img class="img-circle"
+                                         src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100"
+                                         alt="User Pic">
+                                </div>
+                                <div class="col-xs-2 col-sm-2 hidden-md hidden-lg">
+                                    <img class="img-circle"
+                                         src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=50"
+                                         alt="User Pic">
+                                </div>
+                                <div class="col-xs-10 col-sm-10 hidden-md hidden-lg">
+                                    <strong th:text="'Nome:' + ${associado.nome}"></strong><br>
+                                    <dl>
+                                        <dt th:text="'CPF:' + ${associado.cpf}"></dt>
+                                        <dd th:text="'RG:' + ${associado.rg}"></dd>
+                                    </dl>
+                                    <strong>Contatos</strong><br>
+                                    <dl th:each="contato : ${associado.getContatos()}">
+                                        <dt>Telefone:</dt>
+                                        <dd th:text="${contato.ddd} +'-'+ ${contato.numero}"></dd>
+                                    </dl>
+                                    <strong>Endereço</strong><br>
+                                    <dl>
+                                        <dt>Rua:</dt>
+                                        <dd th:text="${associado.endereco.rua}"></dd>
+                                        <dt>Número:</dt>
+                                        <dd th:text="${associado.endereco.numero}"></dd>
+                                        <dt>Complemento:</dt>
+                                        <dd th:text="${associado.endereco.complemento}"></dd>
+                                        <dt>Bairro:</dt>
+                                        <dd th:text="${associado.endereco.bairro}"></dd>
+                                        <dt>CEP:</dt>
+                                        <dd th:text="${associado.endereco.cep}"></dd>
+                                        <dt>Cidade:</dt>
+                                        <dd th:text="${associado.endereco.cidade}"></dd>
+                                        <dt>Estado:</dt>
+                                        <dd th:text="${associado.endereco.estado}"></dd>
+                                    </dl>
+                                    <strong>Conta bancária</strong><br>
+                                    <dl>
+                                        <dt>Instituição:</dt>
+                                        <dd th:text="${associado.banco.instituicao}"></dd>
+                                        <dt>Agência:</dt>
+                                        <dd th:text="${associado.banco.agencia}"></dd>
+                                        <dt>Conta:</dt>
+                                        <dd th:text="${associado.banco.conta}"></dd>
+                                    </dl>
+                                </div>
+                                <div class=" col-md-9 col-lg-9 hidden-xs hidden-sm">
+                                    <strong th:text="'Nome:' + ${associado.nome}"></strong><br>
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                        <tr>
+                                            <td th:text="'CPF:' + ${associado.cpf}"></td>
+                                            <td th:text="'RG:' + ${associado.rg}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <strong>Contatos</strong><br>
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                            <tr th:each="contato : ${associado.getContatos()}">
+                                                <td>Telefone:</td>
+                                                <td th:text="${contato.ddd} +'-'+ ${contato.numero}"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <strong>Endereço</strong><br>
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                            <tr>
+                                                <td>Rua:</td>
+                                                <td th:text="${associado.endereco.rua}"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Número:</td>
+                                                <td th:text="${associado.endereco.numero}"></td>
+                                            </tr>
 
-    <script>
-        $('#cadastraButton').on('click', function () {
-            $("#adicionarAssociado").modal({
-                show: true
-            });
+                                            <tr>
+                                                <td>Complemento:</td>
+                                                <td th:text="${associado.endereco.complemento}"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Bairro:</td>
+                                                <td th:text="${associado.endereco.bairro}"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>CEP:</td>
+                                                <td th:text="${associado.endereco.cep}"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Cidade:</td>
+                                                <td th:text="${associado.endereco.cidade}"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Estado:</td>
+                                                <td th:text="${associado.endereco.estado}"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <strong>Conta bancária</strong><br>
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                            <tr>
+                                                <td>Instituição:</td>
+                                                <td th:text="${associado.banco.instituicao}"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Agência:</td>
+                                                <td th:text="${associado.banco.agencia}"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Conta:</td>
+                                                <td th:text="${associado.banco.conta}"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+
+                            <button class="btn btn-sm btn-warning" type="button"
+                                    data-toggle="tooltip"
+                                    data-original-title="Edit this user"><i class="glyphicon glyphicon-edit"></i></button>
+                            <button class="btn btn-sm btn-danger" type="button"
+                                    data-toggle="tooltip"
+                                    data-original-title="Remove this user"><i class="glyphicon glyphicon-remove"></i></button>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:insert="~{fragments/cadastroFragment :: cadastraAssociado}"></div>
+
+<script>
+    $(document).ready(function() {
+        var panels = $('.user-infos');
+        var panelsButton = $('.dropdown-user');
+        panels.hide();
+
+        //Click dropdown
+        panelsButton.click(function() {
+            //get data-for attribute
+            var dataFor = $(this).attr('data-for');
+            var idFor = $(dataFor);
+
+            //current button
+            var currentButton = $(this);
+            idFor.slideToggle(400, function() {
+                //Completed slidetoggle
+                if(idFor.is(':visible'))
+                {
+                    currentButton.html('<i class="glyphicon glyphicon-chevron-up text-muted"></i>');
+                }
+                else
+                {
+                    currentButton.html('<i class="glyphicon glyphicon-chevron-down text-muted"></i>');
+                }
+            })
         });
-    </script>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        $('[data-toggle="tooltip"]').tooltip();
+
+        $('button').click(function(e) {
+            e.preventDefault();
+            alert("This is a demo.\n :-)");
+        });
+    });
+</script>
 </body>
 </html>
